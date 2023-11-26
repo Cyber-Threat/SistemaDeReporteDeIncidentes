@@ -1,11 +1,15 @@
 package edu.utn.Modelos;
 import org.jetbrains.annotations.NotNull;
+
+import java.time.LocalDate;
+
 public abstract class Persona {
     public enum RazonSocial {
         juridica, fisica
     }
     public RazonSocial razonSocial;
     public String nombreCompleto;
+    private LocalDate fechaDeNacimiento;
     public String numDeTelefono;
     public enum medioDeContacto{
         Email, WhatsApp
@@ -46,4 +50,6 @@ public abstract class Persona {
     public RazonSocial getRazonSocial() {
         return razonSocial;
     }
+    public LocalDate getFechaDeNacimiento() { return fechaDeNacimiento; }
+    public void setFechaDeNacimiento(LocalDate fechaDeNacimiento) { this.fechaDeNacimiento = fechaDeNacimiento; }
 }

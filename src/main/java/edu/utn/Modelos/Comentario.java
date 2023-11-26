@@ -1,5 +1,4 @@
 package edu.utn.Modelos;
-
 import java.util.Date;
 
 public class Comentario {
@@ -20,6 +19,6 @@ public class Comentario {
                 + ")");
         System.out.println("\t" + contenido);
     }
-    public int getIdIncidente() { return idIncidente; }
-    public void setIdIncidente(int idIncidente) { this.idIncidente = idIncidente; }
+    /*public int getIdIncidente() { return idIncidente; }
+    public void setIdIncidente(int idIncidente) { this.idIncidente = idIncidente; }*/
 }

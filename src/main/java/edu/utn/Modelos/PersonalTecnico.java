@@ -1,13 +1,19 @@
 package edu.utn.Modelos;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.jetbrains.annotations.NotNull;
 
+import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.Scanner;
 
+@Setter
+@Getter
 public class PersonalTecnico extends Persona{
     private LinkedList<String> especialidades = new LinkedList<>();
-    private Float tiempoEstimadoDeResolucion;
+    private LocalDate tiempoEstimadoDeResolucion;
+    private boolean disponible;
     public PersonalTecnico(@NotNull RazonSocial tipo, @NotNull String nombreCompleto, @NotNull String cuit) {
         super(tipo, nombreCompleto, cuit);
     }
@@ -31,10 +37,7 @@ public class PersonalTecnico extends Persona{
             }
         );
     }
-    public Float getTiempoEstimadoDeResolucion() {
+    public LocalDate calcularTiempoEstimadoDeResolucion() {
         return tiempoEstimadoDeResolucion;
-    }
-    public void setTiempoEstimadoDeResolucion(Float tiempoEstimadoDeResolucion) {
-        this.tiempoEstimadoDeResolucion = tiempoEstimadoDeResolucion;
     }
 }

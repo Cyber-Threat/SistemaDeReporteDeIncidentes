@@ -9,15 +9,21 @@ import java.util.LinkedList;
 @Getter
 @Setter
 public class Incidente {
+    // ID LONG PK
     private int id;
+    // ID LONG FK (El cliente que reporta el incidente)
     private PersonaCliente cliente;
-    private Servicio servicio;
+    // ID LONG FK
     private PersonalTecnico tecnicoAsignado;
-    private String descripcionProblema;
-    private Problema problema;
+    // ID LONG FK
+    private Servicio servicio;
+    private String titulo;
     private LocalDateTime fechaCreacion;
-    private LocalDateTime fechaResolucion;
+    private LocalDateTime fechaDeCierre;
     private EstadoIncidente estado;
+    private LinkedList<Problema> problemas;
+    private String descripcionProblema;
+    private boolean consideradoComplejo;
     private LinkedList<Comentario> comentarios; // SECCION DE COMENTARIOS
     // Constructor
     public Incidente(int id, PersonaCliente cliente, Servicio servicio, String descripcionProblema, Problema problema, LocalDateTime fechaCreacion, EstadoIncidente estado) {
@@ -25,7 +31,7 @@ public class Incidente {
         this.cliente = cliente;
         this.servicio = servicio;
         this.descripcionProblema = descripcionProblema;
-        this.problema = problema;
+        this.problemas.add(problema);
         this.fechaCreacion = LocalDateTime.now();
         this.estado = EstadoIncidente.ABIERTO;
     }
@@ -39,9 +45,8 @@ public class Incidente {
         notificarCliente("El incidente ha sido resuelto. Comentarios: " + comentarios);
     }
     private void notificarCliente(String mensaje) { } //  PARA HACER!
-    private void imprimirComentarios(){
-        comentarios.stream().forEach(comentario -> { comentario.imprimirComentario(); });
-    }
+    private void notificarTecnico(String mensaje) { } //  PARA HACER!
+    private void imprimirComentarios(){ comentarios.stream().forEach(comentario -> { comentario.imprimirComentario(); }); }
     public void imprimirIncidente(){
         System.out.println(FormatoDeTexto.iconos.info + "Informacion del incidente...");
         System.out.println(FormatoDeTexto.colores.blue + "\t└"
@@ -59,19 +64,19 @@ public class Incidente {
         System.out.println(FormatoDeTexto.colores.blue + "\t└"
                 + FormatoDeTexto.colores.reset + " Fecha de creacion del Incidente: " +
                 this.fechaCreacion.toString());
-        System.out.println((fechaResolucion.equals(null)) ? "Sin resolver." :
-                "Fecha de resolucion: " + fechaCreacion.toString());
         System.out.println(FormatoDeTexto.colores.blue + "\t└"
-                + FormatoDeTexto.colores.reset + " Tipo de problema: " +
-                this.problema.toString());
+                + FormatoDeTexto.colores.reset + " Tipos de problemas: ");
+        this.problemas.stream().forEach(problema -> {
+            System.out.println(FormatoDeTexto.iconos.info + "Tipo de problema: " + problema.nombre);
+            System.out.println(FormatoDeTexto.iconos.info + "Especialidad que puede mitigar el problema: " + problema.especialidad);
+            System.out.println(FormatoDeTexto.iconos.info + "Tiempo estimado de resolucion: " + problema.tiempoEstimadoDeResolucion.toString());
+            System.out.println(FormatoDeTexto.iconos.info + "Servicio vinculado: " + problema.idServicioVinculado.toString());
+        });
         System.out.println(FormatoDeTexto.colores.blue + "\t└"
                 + FormatoDeTexto.colores.reset + " Descripcion del problema: " +
                 this.descripcionProblema);
         System.out.println(FormatoDeTexto.colores.cyan + "◄► ◄► ◄► ◄► ◄► ◄► ◄► ◄► COMENTARIOS ◄► ◄► ◄► ◄► ◄► ◄► ◄► ◄►" + FormatoDeTexto.colores.reset);
         imprimirComentarios();
     }
-    public LocalDateTime getFechaResolucion() { return fechaResolucion; }
-    public void setFechaResolucion(LocalDateTime fechaResolucion) { this.fechaResolucion = fechaResolucion; }
-    public EstadoIncidente getEstado() { return estado; }
-    public void setEstado(EstadoIncidente estado) { this.estado = estado; }
+    public void agregarProblema(Problema p){ this.problemas.add(p); }
 }
