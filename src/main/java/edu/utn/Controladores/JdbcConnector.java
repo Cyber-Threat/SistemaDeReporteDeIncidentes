@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 public class JdbcConnector {
-    private static Connection con = null;
+    public static Connection con = JdbcConnector.getConnection();
     private JdbcConnector() {}
     public static Connection getConnection() {
         if (con != null) { return con; }
