@@ -1,15 +1,17 @@
 package edu.utn.Modelos;
-
+import javax.persistence.*;
 import edu.utn.Interfaces.*;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.LinkedList;
 import java.util.function.Predicate;
 
+@Entity
 public class PersonaCliente extends Persona {
     public PersonaCliente(@NotNull RazonSocial tipo, @NotNull String nombreCompleto, @NotNull String cuit) {
         super(tipo, nombreCompleto, cuit);
     }
+    protected PersonaCliente(){}
     private LinkedList<Servicio> servicios = new LinkedList<>();
     public boolean existeServicio(Servicio s){
         Predicate<Servicio> predicado = servicio -> {

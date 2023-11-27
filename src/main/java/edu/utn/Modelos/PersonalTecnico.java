@@ -1,5 +1,5 @@
 package edu.utn.Modelos;
-
+import javax.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.jetbrains.annotations.NotNull;
@@ -10,13 +10,18 @@ import java.util.Scanner;
 
 @Setter
 @Getter
+@Entity
+@Table(name = "Persona")
 public class PersonalTecnico extends Persona{
-    private LinkedList<String> especialidades = new LinkedList<>();
+    @OneToMany
+    @Column(name = "especialidades")
+    private LinkedList<Especialidad> especialidades = new LinkedList<>();
     private LocalDate tiempoEstimadoDeResolucion;
     private boolean disponible;
     public PersonalTecnico(@NotNull RazonSocial tipo, @NotNull String nombreCompleto, @NotNull String cuit) {
         super(tipo, nombreCompleto, cuit);
     }
+    protected PersonalTecnico(){}
     public void agregarEspecialidades(@NotNull Scanner scanner){
         System.out.println("Ingrese las especialidades del tecnico, " +
                 "la lectura de datos finaliza cuando se ingresa una cadena vacia.");

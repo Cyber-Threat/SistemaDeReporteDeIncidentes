@@ -1,5 +1,5 @@
 package edu.utn.Modelos;
-
+import javax.persistence.*;
 import org.jetbrains.annotations.NotNull;
 
 public class Servicio {

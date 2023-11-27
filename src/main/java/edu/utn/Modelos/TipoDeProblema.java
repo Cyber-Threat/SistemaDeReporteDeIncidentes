@@ -1,5 +1,5 @@
 package edu.utn.Modelos;
-
+import javax.persistence.*;
 import java.util.LinkedList;
 
 public class TipoDeProblema {

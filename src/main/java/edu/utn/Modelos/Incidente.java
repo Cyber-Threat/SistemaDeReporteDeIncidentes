@@ -1,15 +1,19 @@
 package edu.utn.Modelos;
-
 import lombok.Getter;
 import lombok.Setter;
+import javax.persistence.*;
 
 import java.time.LocalDateTime;
 import java.util.LinkedList;
 
 @Getter
 @Setter
+@Entity
+@Table(name = "Incidente")
 public class Incidente {
     // ID LONG PK
+    @Id
+    @Column(name = "idIncidente", nullable = false, unique = true)
     private int id;
     // ID LONG FK (El cliente que reporta el incidente)
     private PersonaCliente cliente;

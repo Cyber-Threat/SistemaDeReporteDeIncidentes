@@ -1,8 +1,12 @@
 package edu.utn.Modelos;
 import java.util.Date;
+import javax.persistence.*;
 
+@Entity
 public class Comentario {
+    @Id
     public int idIncidente; // IDENTIFICACION UNIVOCA DEL INCIDENTE AL QUE HACE REFERENCIA!
+    @ManyToOne
     public Persona persona; // PERSONA QUE DEJO EL COMENTARIO, DEJO EL OBJETO COMO ATRIBUTO
     // PORQUE PRETENDO IMPRIMIR SI LA PERSONA ES TECNICO, CLIENTE, O EMPRESA! ASI COMO
     // TAMBIÉN SU NOMBRE COMPLETO, PERO A LA HORA DE GUARDAR EL COMENTARIO EN LA BASE DE DATOS SOLO
